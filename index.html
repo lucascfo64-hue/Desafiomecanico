@@ -3,10 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <title>Desafio do Mecânico</title>
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:20px;
+}
+select, button{
+padding:12px;
+margin:10px;
+font-size:18px;
+border-radius:8px;
+border:none;
+}
+button{
+background:#ff9800;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+.card{
+background:#222;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+}
+h1{margin-bottom:10px;}
+.quiz{margin-top:20px;}
+</style>
 </head>
+<body>
 
-<body style="background:black;color:white;text-align:center;font-family:Arial">
 <h1>🔧 Desafio do Mecânico</h1>
-<p>Seu aplicativo está online 🚀</p>
+<p>Selecione o veículo</p>
+
+<select id="carro"></select>
+<br>
+<button onclick="mostrar()">Ver dados técnicos</button>
+
+<div id="info" class="card"></div>
+
+<div id="quiz-container" class="card" style="display:none;">
+<h2 id="pergunta"></h2>
+<div id="opcoes"></div>
+<button onclick="proximaPergunta()">Próxima pergunta</button>
+<p id="contador"></p>
+</div>
+
+<script>
+// ====== BASE DE CARROS ======
+const carros = {
+"Gol 1.0 2010":{motor:"1.0 8v flex",oleo:"5w40",capacidade:"3.5L",correia:"Correia dentada",ignicao:"1-3-4-2",problemas:"Bobina, TBI suja"},
+"Uno 1.0 2012":{motor:"1.0 Fire",oleo:"15w40",capacidade:"3L",correia:"Correia dentada",ignicao:"1-3-4-2",problemas:"Marcha lenta irregular"},
+"Onix 1.4 2015":{motor:"1.4 SPE/4",oleo:"5w30",capacidade:"4L",correia:"Correia dentada",ignicao:"1-3-4-2",problemas:"Bobina, cânister"},
+"HB20 1.6 2016":{motor:"1.6 Gamma",oleo:"5w30",capacidade:"3.6L",correia:"Corrente",ignicao:"1-3-4-2",problemas:"Sonda lambda"},
+"Ka 1.0 2019":{motor:"1.0 3cc",oleo:"5w20",capacidade:"3.3L",correia:"Correia dentada",ignicao:"1-2-3",problemas:"Correia banhada"},
+"Corolla 1.8 2010":{motor:"1.8 VVTi",oleo:"5w30",capacidade:"4.2L",correia:"Corrente",ignicao:"1-3-4-2",problemas:"Bico sujo"}
+}
+
+// ====== POPULAR SELECT AUTOMATICAMENTE ======
+let select=document.getElementById("carro")
+for(let c in carros){ select.innerHTML+=`<option>${c}</option>` }
+
+// ====== MOSTRAR DADOS DO VEÍCULO ======
+function mostrar(){
+let c=select.value
+let d=carros[c]
+document.getElementById("info").innerHTML=
+`🔧 Motor: ${d.motor}<br>
+🔧 Óleo: ${d.oleo}<br>
+🔧 Capacidade: ${d.capacidade}<br>
+🔧 Distribuição: ${d.correia}<br>
+🔧 Ignição: ${d.ignicao}<br>
+⚠ Problemas comuns: ${d.problemas}<br><br>
+<button onclick="iniciarQuiz()">Iniciar Quiz</button>`
+}
+
+// ====== BASE DE PERGUNTAS (50 PERGUNTAS NIVEL SENAI) ======
+const perguntas=[
+{q:"Qual a função do torque na manutenção do motor?",o:["Ajustar velas","Apertar parafusos corretamente","Lubrificar óleo","Verificar filtros"],a:1},
+{q:"Qual é a ordem de ignição de um motor 4 cilindros?",o:["1-2-3-4","1-3-4-2","1-4-2-3","2-1-4-3"],a:1},
+{q:"O que significa trepidação na embreagem?",o:["Desgaste do disco","Óleo baixo","Filtro sujo","Bateria fraca"],a:0},
+{q:"Qual óleo recomendado para um motor 1.0 flex?",o:["5w40","15w40","10w30","20w50"],a:0},
+{q:"Qual componente regula a mistura de ar e combustível?",o:["TBI","Velas","Correia","Alternador"],a:0},
+{q:"Qual problema causa marcha lenta irregular?",o:["Sensor rotação","Filtro de óleo","Pastilha de freio","Radiador"],a:0},
+{q:"O que é bobina de ignição?",o:["Peça do arrefecimento","Dispositivo que gera faísca","Filtro de combustível","Sensor MAP"],a:1},
+{q:"Como identificar falha em injeção eletrônica?",o:["Motor falhando, luz acesa","Som alto no escapamento","Óleo escuro","Correia esticada"],a:0},
+{q:"Para que serve a correia dentada?",o:["Apertar pneus","Sincronizar motor","Lubrificar motor","Ajustar freio"],a:1},
+{q:"Qual sintoma de TBI suja?",o:["Falha de aceleração","Bateria fraca","Freio baixo","Estouro no escapamento"],a:0},
+// Adicione mais 40 perguntas nesse formato
+]
+
+// ====== QUIZ ======
+let index=0
+let acertos=0
+
+function iniciarQuiz(){
+document.getElementById("quiz-container").style.display="block"
+document.getElementById("info").style.display="none"
+index=0
+acertos=0
+mostrarPergunta()
+}
+
+function mostrarPergunta(){
+let p=perguntas[index]
+document.getElementById("pergunta").innerText=`${index+1}. ${p.q}`
+let opcoesDiv=document.getElementById("opcoes")
+opcoesDiv.innerHTML=""
+for(let i=0;i<p.o.length;i++){
+let b=document.createElement("button")
+b.innerText=p.o[i]
+b.onclick=function(){verificar(i)}
+opcoesDiv.appendChild(b)
+}
+document.getElementById("contador").innerText=`Pergunta ${index+1} de ${perguntas.length}`
+}
+
+function verificar(i){
+if(i===perguntas[index].a){ acertos++ }
+index++
+if(index<perguntas.length){ mostrarPergunta() }
+else{ finalizarQuiz() }
+}
+
+function proximaPergunta(){ mostrarPergunta() }
+
+function finalizarQuiz(){
+document.getElementById("quiz-container").innerHTML=
+`<h2>Resultado</h2>
+<p>Você acertou ${acertos} de ${perguntas.length}</p>
+<button onclick="location.reload()">Jogar novamente</button>`
+}
+
+</script>
+
 </body>
 </html>
