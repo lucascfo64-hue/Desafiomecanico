@@ -1,36 +1,42 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio do Mecânico</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Desafio do Mecânico</h1>
-        <div id="selecao-carro">
-            <label>Fabricante:</label>
-            <select id="fabricante"></select>
-            <label>Modelo:</label>
-            <select id="modelo"></select>
-            <label>Ano:</label>
-            <select id="ano"></select>
-            <button id="iniciar-quiz">Iniciar Quiz</button>
-        </div>
-        <div id="quiz" class="hidden">
-            <div id="pergunta"></div>
-            <div id="opcoes"></div>
-            <button id="proxima" class="hidden">Próxima</button>
-            <div id="resultado"></div>
-        </div>
-        <div id="simulador-placa">
-            <label>Digite a placa:</label>
-            <input type="text" id="placa">
-            <button id="consultar-placa">Consultar</button>
-            <div id="placa-resultado"></div>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+.container {
+    text-align: center;
+    max-width: 400px;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+.hidden {
+    display: none;
+}
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+select, input {
+    margin: 5px 0;
+    padding: 5px;
+    width: 80%;
+    font-size: 16px;
+}
+#pergunta {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+#opcoes button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+}
