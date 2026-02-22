@@ -1,83 +1,36 @@
-const fabricantes = {
-    'Volkswagen': { 'Gol': [2010,2012,2015], 'Fox':[2011,2014] },
-    'Fiat': { 'Uno':[2010,2013], 'Palio':[2012,2015] },
-    'Ford': { 'Ka':[2011,2015], 'Fiesta':[2012,2016] }
-};
-
-const perguntas = [
-    {pergunta: 'O que causa motor falhando frio?', respostas: ['TBI suja', 'Bobina ruim', 'Óleo baixo', 'Filtro entupido'], correta: 0},
-    {pergunta: 'Trepidação na embreagem significa?', respostas: ['Disco gasto', 'Motor falhando', 'Cabo solto', 'Óleo baixo'], correta: 0},
-    {pergunta: 'Qual o líquido de arrefecimento correto?', respostas:['Água','Óleo','Álcool','Combustível'], correta:0},
-    // Adicione as 50 perguntas completas aqui
-];
-
-const fabricanteSelect = document.getElementById('fabricante');
-const modeloSelect = document.getElementById('modelo');
-const anoSelect = document.getElementById('ano');
-const iniciarQuizBtn = document.getElementById('iniciar-quiz');
-const quizDiv = document.getElementById('quiz');
-const perguntaDiv = document.getElementById('pergunta');
-const opcoesDiv = document.getElementById('opcoes');
-const proximaBtn = document.getElementById('proxima');
-const resultadoDiv = document.getElementById('resultado');
-const placaInput = document.getElementById('placa');
-const consultarPlacaBtn = document.getElementById('consultar-placa');
-const placaResultadoDiv = document.getElementById('placa-resultado');
-
-// Popular fabricantes
-for(let fab in fabricantes){
-    fabricanteSelect.innerHTML += `<option value='${fab}'>${fab}</option>`;
-}
-
-fabricanteSelect.addEventListener('change', ()=>{
-    modeloSelect.innerHTML = '';
-    let modelos = fabricantes[fabricanteSelect.value];
-    for(let mod in modelos){
-        modeloSelect.innerHTML += `<option value='${mod}'>${mod}</option>`;
-    }
-    modeloSelect.dispatchEvent(new Event('change'));
-});
-
-modeloSelect.addEventListener('change', ()=>{
-    anoSelect.innerHTML = '';
-    let anos = fabricantes[fabricanteSelect.value][modeloSelect.value];
-    anos.forEach(a=> anoSelect.innerHTML += `<option value='${a}'>${a}</option>`);
-});
-
-iniciarQuizBtn.addEventListener('click', ()=>{
-    document.getElementById('selecao-carro').classList.add('hidden');
-    quizDiv.classList.remove('hidden');
-    mostrarPergunta(0);
-});
-
-let indicePergunta = 0;
-let acertos = 0;
-
-function mostrarPergunta(i){
-    let p = perguntas[i];
-    perguntaDiv.textContent = p.pergunta;
-    opcoesDiv.innerHTML = '';
-    p.respostas.forEach((r,index)=>{
-        let btn = document.createElement('button');
-        btn.textContent = r;
-        btn.onclick = ()=>{
-            if(index===p.correta){ acertos++; }
-            if(indicePergunta<perguntas.length-1){
-                indicePergunta++;
-                mostrarPergunta(indicePergunta);
-            } else {
-                quizDiv.innerHTML = `<h2>Você acertou ${acertos} de ${perguntas.length}</h2>`;
-            }
-        };
-        opcoesDiv.appendChild(btn);
-    });
-}
-
-consultarPlacaBtn.addEventListener('click', ()=>{
-    let placa = placaInput.value.toUpperCase();
-    let resultado = 'Placa não encontrada';
-    // Base fictícia de placas
-    if(placa==='ABC1234') resultado='Volkswagen Gol 2012';
-    if(placa==='XYZ5678') resultado='Fiat Uno 2013';
-    placaResultadoDiv.textContent = resultado;
-});
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio do Mecânico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Desafio do Mecânico</h1>
+        <div id="selecao-carro">
+            <label>Fabricante:</label>
+            <select id="fabricante"></select>
+            <label>Modelo:</label>
+            <select id="modelo"></select>
+            <label>Ano:</label>
+            <select id="ano"></select>
+            <button id="iniciar-quiz">Iniciar Quiz</button>
+        </div>
+        <div id="quiz" class="hidden">
+            <div id="pergunta"></div>
+            <div id="opcoes"></div>
+            <button id="proxima" class="hidden">Próxima</button>
+            <div id="resultado"></div>
+        </div>
+        <div id="simulador-placa">
+            <label>Digite a placa:</label>
+            <input type="text" id="placa">
+            <button id="consultar-placa">Consultar</button>
+            <div id="placa-resultado"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
