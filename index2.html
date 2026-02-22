@@ -1,59 +1,83 @@
-const perguntas=[
-{q:"Qual a função do torque na manutenção do motor?",o:["Ajustar velas","Apertar parafusos corretamente","Lubrificar óleo","Verificar filtros"],a:1},
-{q:"Qual é a ordem de ignição de um motor 4 cilindros?",o:["1-2-3-4","1-3-4-2","1-4-2-3","2-1-4-3"],a:1},
-{q:"O que significa trepidação na embreagem?",o:["Desgaste do disco","Óleo baixo","Filtro sujo","Bateria fraca"],a:0},
-{q:"Qual óleo recomendado para um motor 1.0 flex?",o:["5w40","15w40","10w30","20w50"],a:0},
-{q:"Qual componente regula a mistura de ar e combustível?",o:["TBI","Velas","Correia","Alternador"],a:0},
-{q:"Qual problema causa marcha lenta irregular?",o:["Sensor rotação","Filtro de óleo","Pastilha de freio","Radiador"],a:0},
-{q:"O que é bobina de ignição?",o:["Peça do arrefecimento","Dispositivo que gera faísca","Filtro de combustível","Sensor MAP"],a:1},
-{q:"Como identificar falha em injeção eletrônica?",o:["Motor falhando, luz acesa","Som alto no escapamento","Óleo escuro","Correia esticada"],a:0},
-{q:"Para que serve a correia dentada?",o:["Apertar pneus","Sincronizar motor","Lubrificar motor","Ajustar freio"],a:1},
-{q:"Qual sintoma de TBI suja?",o:["Falha de aceleração","Bateria fraca","Freio baixo","Estouro no escapamento"],a:0},
-{q:"Qual é a principal função do filtro de ar?",o:["Limpar combustível","Filtrar impurezas do ar","Lubrificar motor","Regular pressão"],a:1},
-{q:"O que pode causar superaquecimento do motor?",o:["Radiador entupido","Correia nova","Óleo correto","Velas ajustadas"],a:0},
-{q:"Qual a função da válvula termostática?",o:["Controlar temperatura do motor","Abrir portas","Regular combustível","Ajustar freio"],a:0},
-{q:"O que significa o símbolo da bateria acesa no painel?",o:["Bateria carregando","Problema elétrico","Óleo baixo","Filtro sujo"],a:1},
-{q:"O que faz o alternador?",o:["Carregar a bateria","Movimentar freio","Lubrificar motor","Regular ignição"],a:0},
-{q:"Quando trocar a correia dentada?",o:["A cada 60 mil km","A cada 5 mil km","Nunca","Só se quebrar"],a:0},
-{q:"Qual a função da sonda lambda?",o:["Medir emissão de gases","Abrir portas","Regular óleo","Controlar ignição"],a:0},
-{q:"O que causa o motor falhar em baixa rotação?",o:["TBI suja","Radiador limpo","Pneu calibrado","Filtro de ar novo"],a:0},
-{q:"Como identificar pastilhas de freio gastas?",o:["Ruído ao frear","Cheiro de combustível","Óleo escuro","Luz acesa painel"],a:0},
-{q:"O que significa luz de óleo no painel?",o:["Baixo nível de óleo","Filtro limpo","Correia nova","Bateria carregada"],a:0},
-{q:"Como funciona a ignição eletrônica?",o:["Gera faísca automática","Lubrifica motor","Move volante","Regula freio"],a:0},
-{q:"Qual a função do catalisador?",o:["Reduz poluição","Lubrifica motor","Ajusta marcha","Move rodas"],a:0},
-{q:"O que pode causar barulho na suspensão?",o:["Buchas desgastadas","Óleo baixo","Velas erradas","Bateria fraca"],a:0},
-{q:"Para que serve a junta do cabeçote?",o:["Evitar vazamento de líquido","Abrir portas","Ajustar marcha","Controlar luz painel"],a:0},
-{q:"O que indica fumaça azul saindo do escapamento?",o:["Queima de óleo","Água no radiador","Pneu furado","Filtro entupido"],a:0},
-{q:"Quando trocar o óleo do motor?",o:["A cada 5 mil km","A cada 100 mil km","Nunca","Só se derramar"],a:0},
-{q:"Qual a função do radiador?",o:["Resfriar o motor","Lubrificar correia","Abrir portas","Carregar bateria"],a:0},
-{q:"O que é TBI?",o:["Tubo de borboleta de injeção","Sensor de óleo","Vela","Filtro"],a:0},
-{q:"Como identificar bobina ruim?",o:["Falha ao acelerar","Motor silencioso","Filtro limpo","Óleo novo"],a:0},
-{q:"O que é ABS?",o:["Sistema de freios anti-travamento","Sensor de óleo","Velas","Filtro"],a:0},
-{q:"Qual a função da embreagem?",o:["Transmitir força do motor para câmbio","Lubrificar motor","Carregar bateria","Abrir portas"],a:0},
-{q:"O que causa motor falhando frio?",o:["TBI suja ou bobina ruim","Filtro limpo","Radiador limpo","Freio ajustado"],a:0},
-{q:"Como identificar vazamento de água?",o:["Líquido no chão","Óleo correto","Filtro limpo","Freio novo"],a:0},
-{q:"O que significa pedal duro na direção hidráulica?",o:["Baixo nível de fluido","Bateria fraca","Velas ruins","Filtro sujo"],a:0},
-{q:"Qual a função do turbo?",o:["Aumentar potência do motor","Lubrificar óleo","Resfriar radiador","Controlar freio"],a:0},
-{q:"O que pode causar carro fraco?",o:["Filtro de ar sujo","Óleo correto","Velas boas","Bateria carregada"],a:0},
-{q:"Quando trocar velas de ignição?",o:["A cada 30 mil km","A cada 5 mil km","Nunca","Só se quebrar"],a:0},
-{q:"Qual a função do sensor MAP?",o:["Medir pressão do coletor","Lubrificar motor","Abrir portas","Ajustar freio"],a:0},
-{q:"O que indica luz de injeção no painel?",o:["Falha no motor","Bateria carregada","Filtro limpo","Velas ajustadas"],a:0},
-{q:"Como identificar amortecedor ruim?",o:["Balanço excessivo","Óleo correto","Filtro limpo","Velas boas"],a:0},
-{q:"O que faz a bomba de combustível?",o:["Enviar combustível ao motor","Abrir portas","Lubrificar motor","Controlar freio"],a:0},
-{q:"O que causa vazamento de óleo?",o:["Junta ou retentor ruim","Filtro limpo","Velas boas","Bateria carregada"],a:0},
-{q:"Qual a função do radiador de óleo?",o:["Resfriar óleo","Lubrificar motor","Abrir portas","Controlar freio"],a:0},
-{q:"Quando trocar correia acessória?",o:["A cada 60 mil km","A cada 5 mil km","Nunca","Só se quebrar"],a:0},
-{q:"O que causa cheiro de combustível?",o:["Vazamento ou bico sujo","Filtro limpo","Velas boas","Bateria carregada"],a:0},
-{q:"O que é válvula EGR?",o:["Recircula gases","Lubrifica motor","Controla freio","Abre portas"],a:0},
-{q:"O que causa trepidação em marcha lenta?",o:["TBI suja ou velas ruins","Óleo correto","Filtro limpo","Bateria carregada"],a:0},
-{q:"Como identificar defeito na bomba de água?",o:["Superaquecimento do motor","Filtro limpo","Velas boas","Bateria carregada"],a:0},
-{q:"O que é filtro de combustível?",o:["Limpar impurezas do combustível","Lubrificar motor","Abrir portas","Controlar freio"],a:0},
-{q:"Quando trocar fluido de freio?",o:["A cada 2 anos","Nunca","Só se travar","A cada 100 mil km"],a:0},
-{q:"O que é sensor de oxigênio?",o:["Controlar mistura ar/combustível","Lubrificar motor","Abrir portas","Controlar freio"],a:0},
-{q:"O que causa barulho em rolamento de roda?",o:["Rolamento desgastado","Óleo correto","Filtro limpo","Velas boas"],a:0},
-{q:"O que é catalisador?",o:["Reduz poluição","Lubrifica motor","Abre portas","Controla freio"],a:0},
-{q:"O que significa luz de airbag acesa?",o:["Falha no sistema de airbag","Óleo correto","Filtro limpo","Velas boas"],a:0},
-{q:"Qual a função do sensor de rotação?",o:["Controlar ignição do motor","Lubrificar motor","Abrir portas","Controlar freio"],a:0},
-{q:"O que causa vazamento de água do radiador?",o:["Mangueira ou junta ruim","Filtro limpo","Velas boas","Bateria carregada"],a:0},
-{q:"O que significa pressão baixa do óleo?",o:["Óleo baixo ou bomba ruim","Filtro limpo","Velas boas","Bateria carregada"],a:0}
+const fabricantes = {
+    'Volkswagen': { 'Gol': [2010,2012,2015], 'Fox':[2011,2014] },
+    'Fiat': { 'Uno':[2010,2013], 'Palio':[2012,2015] },
+    'Ford': { 'Ka':[2011,2015], 'Fiesta':[2012,2016] }
+};
+
+const perguntas = [
+    {pergunta: 'O que causa motor falhando frio?', respostas: ['TBI suja', 'Bobina ruim', 'Óleo baixo', 'Filtro entupido'], correta: 0},
+    {pergunta: 'Trepidação na embreagem significa?', respostas: ['Disco gasto', 'Motor falhando', 'Cabo solto', 'Óleo baixo'], correta: 0},
+    {pergunta: 'Qual o líquido de arrefecimento correto?', respostas:['Água','Óleo','Álcool','Combustível'], correta:0},
+    // Adicione as 50 perguntas completas aqui
 ];
+
+const fabricanteSelect = document.getElementById('fabricante');
+const modeloSelect = document.getElementById('modelo');
+const anoSelect = document.getElementById('ano');
+const iniciarQuizBtn = document.getElementById('iniciar-quiz');
+const quizDiv = document.getElementById('quiz');
+const perguntaDiv = document.getElementById('pergunta');
+const opcoesDiv = document.getElementById('opcoes');
+const proximaBtn = document.getElementById('proxima');
+const resultadoDiv = document.getElementById('resultado');
+const placaInput = document.getElementById('placa');
+const consultarPlacaBtn = document.getElementById('consultar-placa');
+const placaResultadoDiv = document.getElementById('placa-resultado');
+
+// Popular fabricantes
+for(let fab in fabricantes){
+    fabricanteSelect.innerHTML += `<option value='${fab}'>${fab}</option>`;
+}
+
+fabricanteSelect.addEventListener('change', ()=>{
+    modeloSelect.innerHTML = '';
+    let modelos = fabricantes[fabricanteSelect.value];
+    for(let mod in modelos){
+        modeloSelect.innerHTML += `<option value='${mod}'>${mod}</option>`;
+    }
+    modeloSelect.dispatchEvent(new Event('change'));
+});
+
+modeloSelect.addEventListener('change', ()=>{
+    anoSelect.innerHTML = '';
+    let anos = fabricantes[fabricanteSelect.value][modeloSelect.value];
+    anos.forEach(a=> anoSelect.innerHTML += `<option value='${a}'>${a}</option>`);
+});
+
+iniciarQuizBtn.addEventListener('click', ()=>{
+    document.getElementById('selecao-carro').classList.add('hidden');
+    quizDiv.classList.remove('hidden');
+    mostrarPergunta(0);
+});
+
+let indicePergunta = 0;
+let acertos = 0;
+
+function mostrarPergunta(i){
+    let p = perguntas[i];
+    perguntaDiv.textContent = p.pergunta;
+    opcoesDiv.innerHTML = '';
+    p.respostas.forEach((r,index)=>{
+        let btn = document.createElement('button');
+        btn.textContent = r;
+        btn.onclick = ()=>{
+            if(index===p.correta){ acertos++; }
+            if(indicePergunta<perguntas.length-1){
+                indicePergunta++;
+                mostrarPergunta(indicePergunta);
+            } else {
+                quizDiv.innerHTML = `<h2>Você acertou ${acertos} de ${perguntas.length}</h2>`;
+            }
+        };
+        opcoesDiv.appendChild(btn);
+    });
+}
+
+consultarPlacaBtn.addEventListener('click', ()=>{
+    let placa = placaInput.value.toUpperCase();
+    let resultado = 'Placa não encontrada';
+    // Base fictícia de placas
+    if(placa==='ABC1234') resultado='Volkswagen Gol 2012';
+    if(placa==='XYZ5678') resultado='Fiat Uno 2013';
+    placaResultadoDiv.textContent = resultado;
+});
